@@ -1,0 +1,24 @@
+import java.util.Hashtable;
+
+class Solution {
+    public int longestPalindrome(String s) {
+        int answer=0;
+        Hashtable<Character, Integer> t = new Hashtable<>();
+        for(int i=0; i<s.length(); i++){
+            char c = s.charAt(i);
+            t.put(c, t.getOrDefault(c, 0) + 1);
+        }
+        
+        int flag=0; //only the middle letter can appear once, we would like to add it only once
+        for(int val : t.values()){
+            answer+=(val/2)*2;
+            if(flag == 0){
+                if(val%2 == 1) {
+                    ++answer;
+                    flag=1;
+                }
+            }
+        }
+        return answer;
+    }
+}
